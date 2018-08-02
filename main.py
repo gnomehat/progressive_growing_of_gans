@@ -1,13 +1,21 @@
+import os
 import pickle
 import numpy as np
 import tensorflow as tf
 import PIL.Image
 
+# TODO: find a working google drive download script
+FILENAME = 'karras2018iclr-celebahq-1024x1024.pkl'
+#GDRIVE_ID = '15hvzxt_XxuokSmj0uO4xxMTMWVc0cIMU'
+#download_file_from_google_drive(GDRIVE_ID, FILENAME)
+
+os.system('wget -nc https://lwneal.com/{}'.format(FILENAME))
+
 # Initialize TensorFlow session.
 tf.InteractiveSession()
 
 # Import official CelebA-HQ networks.
-with open('karras2018iclr-celebahq-1024x1024.pkl', 'rb') as file:
+with open(FILENAME, 'rb') as file:
     G, D, Gs = pickle.load(file)
 
 # Generate latent vectors.
@@ -27,3 +35,4 @@ images = images.transpose(0, 2, 3, 1) # NCHW => NHWC
 # Save images as PNG.
 for idx in range(images.shape[0]):
     PIL.Image.fromarray(images[idx], 'RGB').save('img%d.jpg' % idx)
+
