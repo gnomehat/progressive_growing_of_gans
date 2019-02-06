@@ -1,6 +1,6 @@
-*fork: minor changes for gnomehat compat, added main.py* -lwneal
-
 ## Progressive Growing of GANs for Improved Quality, Stability, and Variation<br><i>– Official TensorFlow implementation of the ICLR 2018 paper</i>
+
+*Gnomehat Compatible*
 
 **Tero Karras** (NVIDIA), **Timo Aila** (NVIDIA), **Samuli Laine** (NVIDIA), **Jaakko Lehtinen** (NVIDIA and Aalto University)
 
