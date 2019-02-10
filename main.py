@@ -4,9 +4,10 @@ import numpy as np
 import tensorflow as tf
 import PIL.Image
 import imutil
+import random
 
 FILENAME = 'karras2018iclr-celebahq-1024x1024.pkl'
-os.system('wget -nc https://downloads.deeplearninggroup.com/{} -O ../'.format(FILENAME))
+os.system('wget -nc https://downloads.deeplearninggroup.com/{0} -O ../{0}'.format(FILENAME))
 
 # Initialize TensorFlow session.
 tf.InteractiveSession()
@@ -48,12 +49,14 @@ for idx in range(images.shape[0]):
 
 
 # Generate latent videos
-latent_start = latents[6]
-latent_end = latents[9]
+latent_start = random.choice(latents)
+latent_end = random.choice(latents)
 FRAMES = 120
 latent_interp = []
 for i in range(FRAMES):
-    theta = i / FRAMES
+    steepness = 6
+    gamma = (i / FRAMES) - 0.5
+    theta = 1 / (1 + np.exp(-gamma * steepness))
     latent_interp.append(theta * latent_start + (1 - theta) * latent_end)
 
 vid = imutil.VideoLoop('interpolated_face.mp4')
