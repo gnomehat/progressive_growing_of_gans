@@ -5,12 +5,8 @@ import tensorflow as tf
 import PIL.Image
 import imutil
 
-# TODO: find a working google drive download script
 FILENAME = 'karras2018iclr-celebahq-1024x1024.pkl'
-#GDRIVE_ID = '15hvzxt_XxuokSmj0uO4xxMTMWVc0cIMU'
-#download_file_from_google_drive(GDRIVE_ID, FILENAME)
-
-os.system('wget -nc https://lwneal.com/{}'.format(FILENAME))
+os.system('wget -nc https://downloads.deeplearninggroup.com/{} -O ../'.format(FILENAME))
 
 # Initialize TensorFlow session.
 tf.InteractiveSession()
@@ -60,7 +56,7 @@ for i in range(FRAMES):
     theta = i / FRAMES
     latent_interp.append(theta * latent_start + (1 - theta) * latent_end)
 
-vid = imutil.Video('interpolated_face.mp4')
+vid = imutil.VideoLoop('interpolated_face.mp4')
 for img in generate_images_batched(np.array(latent_interp)):
     vid.write_frame(img)
 vid.finish()
