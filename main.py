@@ -6,8 +6,9 @@ import PIL.Image
 import imutil
 import random
 
-FILENAME = 'karras2018iclr-celebahq-1024x1024.pkl'
-os.system('wget -nc https://downloads.deeplearninggroup.com/{0} -O ../{0}'.format(FILENAME))
+# NOTE: stick this in the parent directory so it's available to multiple runs
+FILENAME = '../karras2018iclr-celebahq-1024x1024.pkl'
+os.system('wget -nc https://downloads.deeplearninggroup.com/{0} -O {0}'.format(FILENAME))
 
 # Initialize TensorFlow session.
 tf.InteractiveSession()
