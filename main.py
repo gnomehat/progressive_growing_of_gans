@@ -5,6 +5,7 @@ import tensorflow as tf
 import PIL.Image
 import imutil
 import random
+import time
 
 # NOTE: stick this in the parent directory so it's available to multiple runs
 FILENAME = '../karras2018iclr-celebahq-1024x1024.pkl'
@@ -60,7 +61,7 @@ for i in range(FRAMES):
     theta = 1 / (1 + np.exp(-gamma * steepness))
     latent_interp.append(theta * latent_start + (1 - theta) * latent_end)
 
-vid = imutil.VideoLoop('interpolated_face.mp4')
+vid = imutil.VideoLoop('interpolated_face_{}.mp4'.format(int(time.time())))
 for img in generate_images_batched(np.array(latent_interp)):
     vid.write_frame(img)
 vid.finish()
