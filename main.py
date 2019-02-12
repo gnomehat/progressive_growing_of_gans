@@ -64,4 +64,5 @@ for i in range(FRAMES):
 vid = imutil.VideoLoop('interpolated_face_{}.mp4'.format(int(time.time())))
 for img in generate_images_batched(np.array(latent_interp)):
     vid.write_frame(img)
+imutil.show(img, filename="face_result.jpg")
 vid.finish()
